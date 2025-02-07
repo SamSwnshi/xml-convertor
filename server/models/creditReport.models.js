@@ -37,10 +37,10 @@ const creditReport = new mongoose.Schema(
   },
   
     accountInformation: [{
-      creditCard: { type: String, required: true }, // ✅ Changed to String
-      bankOfCreditCard: { type: String, required: true }, // ✅ Changed to String
-      address: addressSchema, // ✅ Changed to String
-      accountNumber: { type: String, required: true }, // ✅ Changed to String
+      creditCard: { type: String, required: true }, 
+      bankOfCreditCard: { type: String, required: true },
+      address: addressSchema, 
+      accountNumber: { type: String, required: true }, 
       amountOverdue: { type: Number, required: true },
       currentBalance: { type: Number, required: true },
   }],
