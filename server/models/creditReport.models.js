@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
 
+const addressSchema = new mongoose.Schema({
+  street: String,
+  city: String,
+  state: String,
+  postalCode: String
+});
 const creditReport = new mongoose.Schema(
   {
     basicDetails: {
@@ -21,61 +27,24 @@ const creditReport = new mongoose.Schema(
       },
     },
     reportSummary: {
-      totalAccount: {
-        type: String,
-        required: true,
-      },
-      activeAccount: {
-        type: String,
-        required: true,
-      },
-      closedAccount: {
-        type: String,
-        required: true,
-      },
-      currentBalance: {
-        type: String,
-        required: true,
-      },
-      securedBalance: {
-        type: String,
-        required: true,
-      },
-      unsecuredBalance: {
-        type: String,
-        required: true,
-      },
-      last7DaysCredit: {
-        type: String,
-        required: true,
-      },
-    },
-    accountInformation: {
-      creditCard: {
-        type: String,
-        required: true,
-      },
-      bankOfCreditCard: {
-        type: String,
-        required: true,
-      },
-      address: {
-        type: String,
-        required: true,
-      },
-      accountNumber: {
-        type: String,
-        required: true,
-      },
-      amountOverdue: {
-        type: Number,
-        required: true,
-      },
-      currentBalance: {
-        type: Number,
-        required: true,
-      },
-    },
+      totalAccount: { type: Number, required: true },
+      activeAccount: { type: Number, required: true },
+      closedAccount: { type: Number, required: true },
+      currentBalance: { type: Number, required: true },
+      securedBalance: { type: Number, required: true },
+      unsecuredBalance: { type: Number, required: true },
+      last7DaysCredit: { type: Number, required: true },
+  },
+  
+    accountInformation: [{
+      creditCard: { type: String, required: true }, // ✅ Changed to String
+      bankOfCreditCard: { type: String, required: true }, // ✅ Changed to String
+      address: addressSchema, // ✅ Changed to String
+      accountNumber: { type: String, required: true }, // ✅ Changed to String
+      amountOverdue: { type: Number, required: true },
+      currentBalance: { type: Number, required: true },
+  }],
+  
   },
   { timestamps: true }
 );
