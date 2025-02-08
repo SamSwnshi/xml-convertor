@@ -7,7 +7,7 @@ import Header from "./component/Header";
 function App() {
   return (
     <Router>
-      <div className="bg-[#313743] min-h-screen tracking-widest">
+      <div className=" h-screen tracking-widest">
         <Header />
         <Routes>
           <Route path="/" element={<UploadXml />} />

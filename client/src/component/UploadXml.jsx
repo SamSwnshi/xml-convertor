@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../config/api"; // Axios instance
+import api from "../config/api"; 
 
 function UploadPage() {
   const [file, setFile] = useState(null);
@@ -23,11 +23,8 @@ function UploadPage() {
 
     try {
       const response = await api.post("/upload", formData);
-
       setUploadMessage(" File uploaded successfully!");
       setFile(null);
-
-      // Redirect to Report page with uploaded data
       navigate("/report", { state: { reportData: response.data.data } });
     } catch (error) {
       setUploadMessage(` ${error.response?.data?.message || "Error uploading file."}`);

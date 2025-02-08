@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function ReportPage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const report = location.state?.reportData; // Get data from state
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const report = location.state?.reportData;
+  console.log(report);
 
   if (!report) {
     return (
@@ -23,89 +21,92 @@ function ReportPage() {
     );
   }
 
-  const totalAccounts = report.accountInformation.length;
-  const totalPages = Math.ceil(totalAccounts / itemsPerPage);
-
-  // Paginate data
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = report.accountInformation.slice(startIndex, startIndex + itemsPerPage);
-
   return (
-    <div className="h-screen flex flex-col justify-center items-center bg-gray-100 overflow-hidden p-4">
-      
-      {/* Basic Details & Report Summary */}
-      <div className="w-full max-w-4xl md:max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-4 sm:mt-8">
-        <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 ">
-          <h2 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-3">🧑 Basic Details</h2>
-          <p><strong>Name:</strong> {report.basicDetails.name}</p>
-          <p><strong>Mobile:</strong> {report.basicDetails.mobilePhone}</p>
-          <p><strong>PAN:</strong> {report.basicDetails.pan}</p>
-          <p><strong>Credit Score:</strong> {report.basicDetails.creditScore}</p>
-        </div>
+    <div className="h-full p-2 md:p-4 flex flex-col items-center mt-4">
+      <div className="w-full h-auto max-w-6xl bg-white shadow-lg rounded-lg p-3 md:p-6 mb-8 mt-24 ">
+        <h2 className="text-xl md:text-2xl font-semibold text-gray-700 mb-4">🧑 Basic Details</h2>
+        {/* Removed min-w to allow table to shrink on mobile */}
+        <table className="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr className="bg-gray-200 text-gray-700">
+              <th className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">Name</th>
+              <th className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">Mobile</th>
+              <th className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">PAN</th>
+              <th className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">Credit Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="text-center border border-gray-300">
+              <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">{report.basicDetails.name}</td>
+              <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">{report.basicDetails.mobilePhone}</td>
+              <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">{report.basicDetails.pan}</td>
+              <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">₹{report.basicDetails.creditScore}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className="w-full max-w-6xl h-auto bg-white shadow-lg rounded-lg p-3 md:p-6 mb-6 ">
+  <h2 className="text-xl md:text-2xl font-semibold text-gray-700 mb-4">📋 Report Summary</h2>
+  <div className="overflow-x-auto -mx-3 md:mx-0">
+    <table className="w-full border-collapse border border-gray-300 min-w-[800px] md:min-w-0">
+      <thead>
+        <tr className="bg-gray-200 text-gray-700">
+          <th className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">Total Accounts</th>
+          <th className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">Active Accounts</th>
+          <th className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">Closed Accounts</th>
+          <th className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">Current Balance</th>
+          <th className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">Secured Balance</th>
+          <th className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">Unsecured Balance</th>
+          <th className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">Last 7 Days Credit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr className="text-center border border-gray-300">
+          <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">{report.reportSummary.totalAccount}</td>
+          <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">{report.reportSummary.activeAccount}</td>
+          <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">₹{report.reportSummary.closedAccount}</td>
+          <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">₹{report.reportSummary.currentBalance}</td>
+          <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">₹{report.reportSummary.securedBalance}</td>
+          <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">₹{report.reportSummary.unsecuredBalance}</td>
+          <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">₹{report.reportSummary.last7DaysCredit}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-        <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 mt-4 sm:mt-0">
-          <h2 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-3">📋 Report Summary</h2>
-          <p><strong>Total Accounts:</strong> {report.reportSummary.totalAccount}</p>
-          <p><strong>Active Accounts:</strong> {report.reportSummary.activeAccount}</p>
-          <p><strong>Closed Accounts:</strong> {report.reportSummary.closedAccount}</p>
-          <p><strong>Current Balance:</strong> ₹{report.reportSummary.currentBalance}</p>
-        </div>
+ 
+      <div className="w-full max-w-6xl h-full bg-white shadow-lg rounded-lg p-3 md:p-6 mb-6 ">
+        <h2 className="text-xl md:text-2xl font-semibold text-gray-700 mb-4">🏦 Credit Accounts</h2>
+
+        <table className="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr className="bg-gray-200 text-gray-700">
+              <th className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">Bank</th>
+              <th className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">Account No</th>
+              <th className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">Balance</th>
+              <th className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">Amount Overdue</th>
+            </tr>
+          </thead>
+          <tbody>
+            {report.accountInformation.map((account, index) => (
+              <tr key={index} className="text-center border border-gray-300">
+                <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">{account.bankOfCreditCard.toUpperCase()}</td>
+                <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">{account.accountNumber}</td>
+                <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">₹{account.currentBalance}</td>
+                <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">₹{account.amountOverdue}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      {/* Credit Accounts */}
-      <div className="w-full max-w-4xl md:max-w-6xl bg-white shadow-lg rounded-lg p-4 sm:p-6 mt-4 sm:mt-6 h-[40vh] md:h-[50vh] overflow-y-auto">
-        <h2 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-3">🏦 Credit Accounts</h2>
-
-        {totalAccounts === 0 ? (
-          <p className="text-gray-500">No credit accounts found.</p>
-        ) : (
-          <>
-            <div className="space-y-4">
-              {currentItems.map((account, index) => (
-                <div key={index} className="border-b pb-2">
-                  <p><strong>Bank:</strong> {account.bankOfCreditCard}</p>
-                  <p><strong>Account No:</strong> {account.accountNumber}</p>
-                  <p><strong>Balance:</strong> ₹{account.currentBalance}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex flex-col items-center mt-4 gap-2">
-                <span className="text-gray-700 font-semibold text-center">
-                  Page {currentPage} of {totalPages}
-                </span>
-                <div className="flex gap-4 flex-wrap justify-center">
-                  <button
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-                    onClick={() => setCurrentPage((prev) => prev - 1)}
-                    disabled={currentPage === 1}
-                  >
-                    Previous
-                  </button>
-                  <button
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
-                    disabled={currentPage === totalPages}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-
-      {/* Upload Button */}
       <button
         onClick={() => navigate("/")}
-        className="mt-4 sm:mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-red-700"
+        className="mt-4 mb-6 bg-blue-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-red-700 text-sm md:text-base"
       >
         Upload Another File
       </button>
-
     </div>
   );
 }
