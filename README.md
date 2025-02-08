@@ -73,7 +73,7 @@
    npm install
 3. Install frontend dependencies:
    ```bash
-   cd ../client
+   cd client
    npm install
 4. Set up your environment variables:
    ```bash
