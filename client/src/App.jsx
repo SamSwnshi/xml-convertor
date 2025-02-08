@@ -43,14 +43,14 @@ function App() {
   };
 
   return (
-    <div >
+    <div className="bg-[#313743] min-h-screen">
       <Header/>
       <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg p-6">
        
 
         {/* Upload Section */}
         <div className="bg-gray-50 p-4 rounded-lg shadow-md mb-6">
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">📂 Upload XML File</h2>
+          <h2 className="text-2xl font-semibold text-red-700 mb-2">📂 Upload XML File</h2>
           <div className="flex gap-4 items-center">
             <input type="file" onChange={handleFileChange} className="border p-2 rounded-lg" />
             <button
