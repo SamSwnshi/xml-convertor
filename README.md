@@ -69,11 +69,11 @@
    cd samswnshi-xml-convertor
 2. Install backend dependencies:
    ```bash 
-   cd backend
+   cd server
    npm install
 3. Install frontend dependencies:
    ```bash
-   cd ../frontend
+   cd ../client
    npm install
 4. Set up your environment variables:
    ```bash
