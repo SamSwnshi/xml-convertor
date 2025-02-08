@@ -64,7 +64,7 @@ function ReportPage() {
         <tr className="text-center border border-gray-300">
           <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">{report.reportSummary.totalAccount}</td>
           <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">{report.reportSummary.activeAccount}</td>
-          <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">₹{report.reportSummary.closedAccount}</td>
+          <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">{report.reportSummary.closedAccount}</td>
           <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">₹{report.reportSummary.currentBalance}</td>
           <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">₹{report.reportSummary.securedBalance}</td>
           <td className="border border-gray-300 px-2 md:px-4 py-2 text-xs md:text-base whitespace-nowrap">₹{report.reportSummary.unsecuredBalance}</td>
