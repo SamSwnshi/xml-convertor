@@ -40,7 +40,7 @@ function ReportPage() {
               <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">{report.basicDetails.name}</td>
               <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">{report.basicDetails.mobilePhone}</td>
               <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">{report.basicDetails.pan}</td>
-              <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">₹{report.basicDetails.creditScore}</td>
+              <td className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base">{report.basicDetails.creditScore}</td>
             </tr>
           </tbody>
         </table>
